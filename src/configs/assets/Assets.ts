@@ -21,10 +21,15 @@ export const enum ASSETS_NAME {
     Card8 = "Card8",
     Card9 = "Card9",
     CardBack = "CardBack",
+    CardUncknow = "CardUncknow",
     IconMatch = "IconMatch",
     IconTape = "IconTape",
     IconTnt = "IconTnt",
     IconWindow = "IconWindow",
+    Button = "Button",
+    Hand = "Hand",
+    Logo = "Logo",
+    Popup = "Popup",
 }
 
 export const Assets: ReadonlyArray<IROResourceCfg> = [
@@ -129,6 +134,11 @@ export const Assets: ReadonlyArray<IROResourceCfg> = [
         type: "image",
     },
     {
+        name: ASSETS_NAME.CardUncknow,
+        path: "assets/images/ui/cards/card_uncknow.png",
+        type: "image",
+    },
+    {
         name: ASSETS_NAME.IconMatch,
         path: "assets/images/ui/icon/icon_match.png",
         type: "image",
@@ -146,6 +156,26 @@ export const Assets: ReadonlyArray<IROResourceCfg> = [
     {
         name: ASSETS_NAME.IconWindow,
         path: "assets/images/ui/icon/icon_window.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.Button,
+        path: "assets/images/ui/button.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.Hand,
+        path: "assets/images/ui/hand.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.Logo,
+        path: "assets/images/ui/logo.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.Popup,
+        path: "assets/images/ui/popup.png",
         type: "image",
     },
 ];
