@@ -1,5 +1,5 @@
 import { Component } from '../core/Component';
-import { IROResizeCfg } from './types';
+import { IROOrientationCfg, IROResizeCfg } from './types';
 
 export class Resize extends Component
 {
@@ -12,9 +12,20 @@ export class Resize extends Component
     }
 
     override onCreate() {
-        this.parent.setPosition(this.props.position.x, this.props.position.y);
-        
-        this.props.size && this.parent.setSize(this.props.size.width, this.props.size.height);
-        this.props.scale && this.parent.setScale(this.props.scale.x, this.props.scale.y);
+        this.scene.scale.on('resize', this.onResize, this);
+
+        this.onResize();
+    }
+
+    private onResize() {
+        const { innerWidth, innerHeight } = window;
+        const isLandscape: boolean = (innerWidth / innerHeight) > 1;
+        const orientation: IROOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
+
+        orientation.absolutePosition && this.parent.setPosition(orientation.absolutePosition.x, orientation.absolutePosition.y);
+        orientation.relativePosition &&
+            this.parent.setPosition(innerWidth * orientation.relativePosition.x, innerHeight * orientation.relativePosition.y);
+        orientation.scale && this.parent.setScale(orientation.scale.x, orientation.scale.y);
+        orientation.size && this.parent.setSize(orientation.size.width, orientation.size.height);
     }
 }

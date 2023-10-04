@@ -16,7 +16,7 @@ const config: Phaser.Types.Core.GameConfig = {
         HudScene
     ],
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.RESIZE,
         parent: "game",
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },

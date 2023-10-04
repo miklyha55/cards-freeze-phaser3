@@ -41,7 +41,6 @@ export default class LoaderScene extends Phaser.Scene {
 
     private async loadResoures(): Promise<void> {
         Assets.forEach((element)=> {
-            console.log(element)
             this.load[element.type](element.name, element.path);
         });
 

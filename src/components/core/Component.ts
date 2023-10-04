@@ -5,7 +5,7 @@ import { IROComponentCfg } from './types';
 export class Component {
     name: string;
     container: Phaser.GameObjects.Container;
-    parent: Phaser.GameObjects.Container;
+    parent: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite;
     
     protected scene: Phaser.Scene;
 

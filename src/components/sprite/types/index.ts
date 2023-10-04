@@ -1,8 +1,12 @@
-import { IVec2 } from "../../../utils/types";
 import { IROComponentCfg } from "../../core/types";
+import { IROOrientationCfg } from "../../resize/types";
 
 export interface IROSpriteCfg extends IROComponentCfg {
     readonly texture: string;
-    readonly origin?: IVec2;
-    readonly position?: IVec2;
+    readonly resize?: IROSpriteResizeCfg;
+}
+
+export interface IROSpriteResizeCfg {
+    readonly portrait: IROOrientationCfg;
+    readonly landscape: IROOrientationCfg;
 }

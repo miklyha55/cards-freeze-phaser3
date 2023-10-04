@@ -15,11 +15,11 @@ export class GameObjectManager {
         gameObject.index = this.gameObjects.length - 1;
         
         gameObject.remove = () => {
-            gameObject.conponents?.forEach(component => {
+            gameObject.components?.forEach(component => {
                 component.remove();
             });
 
-            gameObject.conponents = [];
+            gameObject.components = [];
             gameObject.container.destroy();
             gameObject.onRemove();
 
