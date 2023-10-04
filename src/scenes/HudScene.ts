@@ -2,12 +2,12 @@ import * as Phaser from 'phaser';
 
 import { SCENE_NAMES } from './constants';
 import { IROContextCfg } from './types';
-import { Logo } from '../prefabs/Logo';
-import { Button } from '../prefabs/Button';
 import { UiElements } from '../screens/UiElements';
+import { Popup } from '../prefabs/Popup';
 
 export default class HudScene extends Phaser.Scene {
-   private uiElements: UiElements;
+    uiElements: UiElements;
+    popup: Popup;
 
     constructor() {
         super(SCENE_NAMES.HudScene);
@@ -15,5 +15,6 @@ export default class HudScene extends Phaser.Scene {
 
     create(context: IROContextCfg) {
         this.uiElements = new UiElements({ context });
+        this.popup = new Popup({ context });
     }
 }

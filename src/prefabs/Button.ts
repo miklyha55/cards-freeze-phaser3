@@ -1,4 +1,5 @@
 import { UiElementsCommand } from "../components/input/commands/UiElementsCommand";
+import { Resize } from "../components/resize/Resize";
 import { Sprite } from "../components/sprite/Sprite";
 import { ASSETS_NAME } from "../configs/assets/Assets";
 import { GameObject } from "../managers/gameObject/GameObject";
@@ -13,18 +14,6 @@ export class Button {
             name: "Sprite",
             scene: props.context.scenes.hudScene,
             texture: ASSETS_NAME.Button,
-            resize: {
-                portrait: {
-                    absolutePosition: { x: 230, y: 900 },
-                    origin: { x: 0, y: 0 },
-                    scale: { x: 2, y: 2 },
-                },
-                landscape: {
-                    absolutePosition: { x: 230, y: 850 },
-                    origin: { x: 0, y: 0 },
-                    scale: { x: 2, y: 2 },
-                }
-            }
         });
 
         this.gameObject = props.context.gameObjectManager.createGameObject(
@@ -33,6 +22,20 @@ export class Button {
                 scene: props.context.scenes.hudScene,
                 components: [
                     spriteComponent,
+                    new Resize({
+                        name: "Resize",
+                        scene: props.context.scenes.hudScene,
+                        portrait: {
+                            absolutePosition: { x: 230, y: 900 },
+                            origin: { x: 0, y: 0 },
+                        },
+                        landscape: {
+                            absolutePosition: { x: 230, y: 850 },
+                            origin: { x: 0, y: 0 },
+                            scale: { x: 2, y: 2 },
+                        },
+                        parent: spriteComponent.sprite,
+                    }),
                     new UiElementsCommand(props.context, spriteComponent.sprite),
                 ],
                 context: props.context,

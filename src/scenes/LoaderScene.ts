@@ -31,7 +31,7 @@ export default class LoaderScene extends Phaser.Scene {
 
             jsonGame: this.cache.json.get(ASSETS_NAME.GameCfg),
             renderGameManager: new RenderManager(gameScene, RENDER_GAME_LAYERS),
-            renderUiManager: new RenderManager(gameScene, RENDER_UI_LAYERS),
+            renderUiManager: new RenderManager(hudScene, RENDER_UI_LAYERS),
             gameObjectManager: new GameObjectManager(),
         }
 

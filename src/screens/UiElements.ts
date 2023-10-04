@@ -19,7 +19,7 @@ export class UiElements {
                         scene: props.context.scenes.hudScene,
                         landscape: {
                             relativePosition: { x: 0, y: 0 },
-                            scale: { x: 0.1, y: 0.1 },
+                            scale: { x: 0.13, y: 0.13 },
                         },
                         portrait: {
                             relativePosition: { x: 0, y: 0 },
