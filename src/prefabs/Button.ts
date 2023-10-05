@@ -1,4 +1,4 @@
-import { UiElementsCommand } from "../components/input/commands/UiElementsCommand";
+import { RedirectCommand } from "../components/input/commands/RedirectCommand";
 import { Resize } from "../components/resize/Resize";
 import { Sprite } from "../components/sprite/Sprite";
 import { ASSETS_NAME } from "../configs/assets/Assets";
@@ -36,7 +36,7 @@ export class Button {
                         },
                         parent: spriteComponent.sprite,
                     }),
-                    new UiElementsCommand(props.context, spriteComponent.sprite),
+                    new RedirectCommand(props.context, spriteComponent.sprite),
                 ],
                 context: props.context,
                 renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.UiElements),

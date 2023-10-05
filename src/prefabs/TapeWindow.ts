@@ -1,4 +1,3 @@
-import { RedirectCommand } from "../components/input/commands/RedirectCommand";
 import { Resize } from "../components/resize/Resize";
 import { Sprite } from "../components/sprite/Sprite";
 import { ASSETS_NAME } from "../configs/assets/Assets";
@@ -6,38 +5,41 @@ import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
 
-export class Logo {
+export class TapeWindow {
     gameObject: GameObject;
 
+    private spriteTapeWindow: Sprite;
+
     constructor(props: IROPrefabCfg) {
-        const spriteComponent: Sprite = new Sprite({
+        this.spriteTapeWindow = new Sprite({
             name: "Sprite",
-            scene: props.context.scenes.hudScene,
-            texture: ASSETS_NAME.Logo,
+            scene: props.context.scenes.gameScene,
+            texture: ASSETS_NAME.TapeWindow,
         });
 
         this.gameObject = props.context.gameObjectManager.createGameObject(
             {
-                name: "Logo",
-                scene: props.context.scenes.hudScene,
+                name: "TapeWindow",
+                scene: props.context.scenes.gameScene,
                 components: [
-                    spriteComponent,
+                    this.spriteTapeWindow,
                     new Resize({
                         name: "Resize",
-                        scene: props.context.scenes.hudScene,
+                        scene: props.context.scenes.gameScene,
                         portrait: {
-                            origin: { x: 0, y: 0 },
+                            absolutePosition: { x: 15, y: -300 },
+                            origin: { x: 0.5, y: 1 },
                         },
                         landscape: {
-                            origin: { x: 0, y: 0 },
+                            absolutePosition: { x: 15, y: -300 },
+                            origin: { x: 0.5, y: 1 },
                         },
-                        parent: spriteComponent.sprite,
+                        parent: this.spriteTapeWindow.sprite,
                     }),
-                    new RedirectCommand(props.context, spriteComponent.sprite),
                 ],
                 context: props.context,
-                renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.UiElements),
+                renderLayer: props.context.renderGameManager.getLayerByName(RENDER_LAYERS_NAME.Enviroment),
             }
-        )
+        );
     }
 }

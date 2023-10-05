@@ -1,20 +1,17 @@
-import { ICellVec2, IVec2 } from "./types";
+import { IVec2 } from "./types";
 
 export namespace Utils {
-    export function getPositionFromCell(cellVec2: ICellVec2, size: number): IVec2 {
-        return {
-            x: cellVec2.col * size,
-            y: cellVec2.row * size,
-        }
+    export function getWorldPosition(
+        target: Phaser.GameObjects.Container
+        | Phaser.GameObjects.Sprite
+        | Phaser.GameObjects.Image
+    ) {
+        const matrix: Phaser.GameObjects.Components.TransformMatrix = target.getWorldTransformMatrix();
+        const position: IVec2 = { x: matrix.getX(0, 0), y: matrix.getY(0, 0) };
+        
+        return position;
     }
-
-    export function getCellVec2FromPosition(position: IVec2, size: number): ICellVec2 {
-        return {
-            col: position.x / size,
-            row: position.y / size,
-        }
-    }
-
+    
     export function add(vec1: IVec2, vec2: IVec2): IVec2 {
         return {
             x: vec1.x + vec2.x,

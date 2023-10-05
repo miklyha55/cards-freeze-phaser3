@@ -9,7 +9,8 @@ import { Shadow } from "../prefabs/Shadow";
 
 export class Popup {
     gameObject: GameObject;
-    spritePopup: Sprite;
+    
+    private spritePopup: Sprite;
 
     constructor(props: IROPrefabCfg) {
         this.spritePopup = new Sprite({

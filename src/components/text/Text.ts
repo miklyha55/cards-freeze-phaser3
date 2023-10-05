@@ -28,7 +28,7 @@ export class Text extends Component
         this.parent.off(COMPONENT_EVENTS.SET_TEXT, this.onSetText, this);
     }
 
-    private onSetText(text: string) {
+    onSetText(text: string) {
         this.text.setText(text);
     }
 }

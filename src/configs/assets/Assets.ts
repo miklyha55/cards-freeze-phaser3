@@ -11,6 +11,7 @@ export const enum ASSETS_NAME {
     Tape = "Tape",
     TapeWindow = "TapeWindow",
     Window = "Window",
+    WindowRepair = "WindowRepair",
     Bg = "Bg",
     Card2 = "Card2",
     Card3 = "Card3",
@@ -81,6 +82,11 @@ export const Assets: ReadonlyArray<IROResourceCfg> = [
     {
         name: ASSETS_NAME.Window,
         path: "assets/images/game/interactive/window.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.WindowRepair,
+        path: "assets/images/game/interactive/window_repair.png",
         type: "image",
     },
     {

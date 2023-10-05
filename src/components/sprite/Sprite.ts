@@ -26,7 +26,7 @@ export class Sprite extends Component
         this.parent.off(COMPONENT_EVENTS.SET_TEXTURE, this.onSetTexture, this);
     }
 
-    private onSetTexture(key: string) {
+    onSetTexture(key: string) {
         this.sprite.setTexture(key);
     }
 }
