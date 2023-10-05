@@ -39,4 +39,8 @@ export namespace Utils {
     export function mag(vec: IVec2): number {
         return Math.sqrt(vec.x * vec.x + vec.y * vec.y);
     }
+
+    export function delay(ms: number) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
 }

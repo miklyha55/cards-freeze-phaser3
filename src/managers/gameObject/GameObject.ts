@@ -9,8 +9,8 @@ export class GameObject {
     index: number;
     components: Array<Component>;
     container: Phaser.GameObjects.Container;
-
-    private scene: Phaser.Scene;
+    scene: Phaser.Scene;
+    
     private renderLayer: Phaser.GameObjects.Container | null;
 
     protected context: IROContextCfg;
