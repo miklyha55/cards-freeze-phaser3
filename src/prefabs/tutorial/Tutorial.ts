@@ -9,6 +9,8 @@ export class Tutorial {
     gameObject: GameObject;
 
     private tutorialHand: TutorialHand;
+    private timer: Phaser.Time.TimerEvent;
+    private seconds: number;
     private isMove: boolean;
 
     constructor(props: IROPrefabCfg) {
@@ -26,7 +28,7 @@ export class Tutorial {
         this.gameObject.container.add(this.tutorialHand.gameObject.container);
 
         this.tutorialHand.gameObject.container.emit(COMPONENT_EVENTS.TOGGLE_ACTIVE, false, false);
-
+        
         this.toggleTutorial({
             active: true,
             relativePosition: {
@@ -85,7 +87,27 @@ export class Tutorial {
 
         if(props.active) {
             this.loopAnimation();
+            this.timer?.remove();
+        } else {
+            if(props.restartSeconds) {
+                this.startTimer(props.restartSeconds);
+            }
         }
+    }
+
+    private startTimer(seconds: number) {
+        this.seconds = seconds;
+        this.timer = this.gameObject.scene.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.seconds--;
+
+                if(!this.seconds) {
+                    this.toggleTutorial({ active: true });
+                }
+            },
+            loop: true,
+        });
     }
 
     private loopAnimation() {

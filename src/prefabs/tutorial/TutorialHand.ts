@@ -33,7 +33,6 @@ export class TutorialHand {
         );
 
         this.render = new Render({ context: props.context });
-
         this.gameObject.container.add(this.render.gameObject.container);
     }
 }
