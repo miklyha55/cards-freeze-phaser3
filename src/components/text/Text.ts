@@ -20,7 +20,6 @@ export class Text extends Component
         props.fontFamily && this.text.setFontFamily(props.fontFamily);
 
         this.container.add(this.text);
-        console.log(this.text)
     }
 
     override onCreate() {

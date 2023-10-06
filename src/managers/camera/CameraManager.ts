@@ -1,4 +1,4 @@
-import { IROOrientationCfg, IROResizeCfg } from "../../components/resize/types";
+import { IOrientationCfg, IROResizeCfg } from "../../components/resize/types";
 
 export class CameraManager {
     props: IROResizeCfg;
@@ -20,7 +20,7 @@ export class CameraManager {
     private onResize() {
         const { innerWidth, innerHeight } = window;
         const isLandscape: boolean = (innerWidth / innerHeight) > 1;
-        const orientation: IROOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
+        const orientation: IOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
 
         if(orientation.absolutePosition) {
             this.camera.setScroll(orientation.absolutePosition.x, orientation.absolutePosition.y);

@@ -54,9 +54,13 @@ export class Timer {
        this.isStop = active;
     }
 
+    removeTimer() {
+        this.timer.remove();
+    }
+
     private startTimer() {
         this.updateView();
-        
+
         this.timer = this.gameObject.scene.time.addEvent({
             delay: 1000,
             callback: () => {

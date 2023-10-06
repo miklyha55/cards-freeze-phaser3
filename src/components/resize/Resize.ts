@@ -1,9 +1,9 @@
 import { Component } from '../core/Component';
-import { IROOrientationCfg, IROResizeCfg } from './types';
+import { IOrientationCfg, IROResizeCfg } from './types';
 
 export class Resize extends Component
 {
-    private readonly props: IROResizeCfg;
+    props: IROResizeCfg;
 
     constructor(props: IROResizeCfg) {
         super(props);
@@ -21,10 +21,10 @@ export class Resize extends Component
         this.onResize();
     }
 
-    private onResize() {
+    onResize() {
         const { innerWidth, innerHeight } = window;
         const isLandscape: boolean = (innerWidth / innerHeight) > 1;
-        const orientation: IROOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
+        const orientation: IOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
 
         if(orientation.absolutePosition) {
             this.parent.setPosition(orientation.absolutePosition.x, orientation.absolutePosition.y);

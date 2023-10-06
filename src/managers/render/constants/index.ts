@@ -5,6 +5,7 @@ export const enum RENDER_LAYERS_NAME {
     Character = "Character",
     Enviroment = "Enviroment",
     CardsStack = "CardsStack",
+    Tutorial = "Tutorial",
 }
 
 export const RENDER_GAME_LAYERS: string[] = [
@@ -17,4 +18,5 @@ export const RENDER_UI_LAYERS: string[] = [
     RENDER_LAYERS_NAME.UiElements,
     RENDER_LAYERS_NAME.CardsStack,
     RENDER_LAYERS_NAME.Popup,
+    RENDER_LAYERS_NAME.Tutorial,
 ]
