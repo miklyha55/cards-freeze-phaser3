@@ -6,12 +6,14 @@ import { UiElements } from '../screens/UiElements';
 import { Popup } from '../screens/Popup';
 import { COMPONENT_EVENTS } from '../components/core/events';
 import { Utils } from '../utils';
-import { CardsStack } from '../prefabs/CardsStack';
+import { CardsStack } from '../prefabs/cardStack/CardsStack';
+import { CardsOpen } from '../prefabs/openCard/CardsOpen';
 
 export default class HudScene extends Phaser.Scene {
     uiElements: UiElements;
     popup: Popup;
     cardsStack: CardsStack;
+    cardsOpen: CardsOpen;
 
     constructor() {
         super(SCENE_NAMES.HudScene);
@@ -24,6 +26,7 @@ export default class HudScene extends Phaser.Scene {
         this.popup.gameObject.container.emit(COMPONENT_EVENTS.TOGGLE_ACTIVE, false, false);
         
         // this.cardsStack = new CardsStack({ context });
+        this.cardsOpen = new CardsOpen({ context });
         // this.popupShow();
     }
 

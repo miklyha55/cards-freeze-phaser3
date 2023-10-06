@@ -7,8 +7,9 @@ import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
 import { IVec2 } from "../utils/types";
-import { TapeHand } from "./TapeHand";
-import { TapeWindow } from "./TapeWindow";
+import { TapeHand } from "./tapeWindow/TapeHand";
+import { TapeWindow } from "./tapeWindow/TapeWindow";
+import { Utils } from '../utils';
 
 export class Window {
     gameObject: GameObject;
@@ -88,21 +89,12 @@ export class Window {
     }
 
     async repairAnimation() {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>(async (resolve) => {
             this.tapeWindow.gameObject.remove();
             this.spriteWindow.onSetTexture(ASSETS_NAME.WindowRepair);
 
-            const duration: number = 100;
-
-            this.gameObject.scene.tweens.add({
-                targets: this.gameObject.container,
-                scale: this.gameObject.container.scale + 0.05,
-                duration,
-                yoyo: true,
-                onComplete: () => {
-                    resolve();
-                },
-            });
+            await Utils.bounceEffect(this.gameObject.scene, this.gameObject.container, 0.05);
+            resolve();
         });
     }
 
@@ -111,18 +103,11 @@ export class Window {
             this.tapeHand.gameObject.container.alpha = 1;
 
             this.moveToPath(1, resolve);
-        }).then(() => {
+        }).then(async () => {
             this.deleteMask();
             this.tapeHand.gameObject.container.alpha = 0;
 
-            const duration: number = 100;
-
-            this.gameObject.scene.tweens.add({
-                targets: this.gameObject.container,
-                scale: this.gameObject.container.scale + 0.05,
-                duration,
-                yoyo: true,
-            });
+            await Utils.bounceEffect(this.gameObject.scene, this.gameObject.container, 0.05);
         });
     }
 

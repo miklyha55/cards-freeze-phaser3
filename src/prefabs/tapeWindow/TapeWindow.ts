@@ -1,9 +1,9 @@
-import { Resize } from "../components/resize/Resize";
-import { Sprite } from "../components/sprite/Sprite";
-import { ASSETS_NAME } from "../configs/assets/Assets";
-import { GameObject } from "../managers/gameObject/GameObject";
-import { IROPrefabCfg } from "../managers/gameObject/types";
-import { RENDER_LAYERS_NAME } from "../managers/render/constants";
+import { Resize } from "../../components/resize/Resize";
+import { Sprite } from "../../components/sprite/Sprite";
+import { ASSETS_NAME } from "../../configs/assets/Assets";
+import { GameObject } from "../../managers/gameObject/GameObject";
+import { IROPrefabCfg } from "../../managers/gameObject/types";
+import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
 
 export class TapeWindow {
     gameObject: GameObject;

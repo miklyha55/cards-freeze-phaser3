@@ -2,8 +2,8 @@ import { Resize } from "../components/resize/Resize";
 import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
-import { Button } from "../prefabs/Button";
-import { Logo } from "../prefabs/Logo";
+import { Button } from "../prefabs/uiElements/Button";
+import { Logo } from "../prefabs/uiElements/Logo";
 
 export class UiElements {
     gameObject: GameObject;

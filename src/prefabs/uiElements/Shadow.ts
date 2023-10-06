@@ -1,7 +1,7 @@
-import { Rectangle } from "../components/rectangle/Rectangle";
-import { GameObject } from "../managers/gameObject/GameObject";
-import { IROPrefabCfg } from "../managers/gameObject/types";
-import { RENDER_LAYERS_NAME } from "../managers/render/constants";
+import { Rectangle } from "../../components/rectangle/Rectangle";
+import { GameObject } from "../../managers/gameObject/GameObject";
+import { IROPrefabCfg } from "../../managers/gameObject/types";
+import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
 
 export class Shadow {
     gameObject: GameObject;

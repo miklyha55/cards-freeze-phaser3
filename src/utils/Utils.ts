@@ -1,3 +1,5 @@
+import * as Phaser from 'phaser';
+
 import { IVec2 } from "./types";
 
 export namespace Utils {
@@ -10,6 +12,22 @@ export namespace Utils {
         const position: IVec2 = { x: matrix.getX(0, 0), y: matrix.getY(0, 0) };
         
         return position;
+    }
+
+    export function bounceEffect(scene: Phaser.Scene, container: Phaser.GameObjects.Container, deltaScale: number = 0.1) {
+        return new Promise<void>(async (resolve) => {
+            const duration: number = 100;
+
+            scene.tweens.add({
+                targets: container,
+                scale: container.scale + deltaScale,
+                duration,
+                yoyo: true,
+                onComplete: () => {
+                    resolve();
+                },
+            });
+        });
     }
     
     export function add(vec1: IVec2, vec2: IVec2): IVec2 {

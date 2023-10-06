@@ -5,7 +5,7 @@ import { ASSETS_NAME } from "../configs/assets/Assets";
 import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
-import { Shadow } from "../prefabs/Shadow";
+import { Shadow } from "../prefabs/uiElements/Shadow";
 
 export class Popup {
     gameObject: GameObject;

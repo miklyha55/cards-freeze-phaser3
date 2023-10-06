@@ -1,9 +1,10 @@
-import { COMPONENT_EVENTS } from "../components/core/events";
-import { Resize } from "../components/resize/Resize";
-import { GameObject } from "../managers/gameObject/GameObject";
-import { IROPrefabCfg } from "../managers/gameObject/types";
-import { RENDER_LAYERS_NAME } from "../managers/render/constants";
-import { Utils } from "../utils";
+import { COMPONENT_EVENTS } from "../../components/core/events";
+import { Resize } from "../../components/resize/Resize";
+import { ASSETS_NAME } from "../../configs/assets/Assets";
+import { GameObject } from "../../managers/gameObject/GameObject";
+import { IROPrefabCfg } from "../../managers/gameObject/types";
+import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
+import { Utils } from "../../utils";
 import { CardStack } from "./CardStack";
 
 export class CardsStack {
@@ -44,6 +45,7 @@ export class CardsStack {
         this.cards = [];
 
         this.fillStack();
+        this.addCard(ASSETS_NAME.CardBack);
     }
 
     addCard(texture: string) {
@@ -53,29 +55,13 @@ export class CardsStack {
 
             cardStack.gameObject.container.emit(COMPONENT_EVENTS.SET_TEXTURE, texture);
 
-            await this.addEffect(cardStack);
+            await Utils.bounceEffect(this.gameObject.scene, cardStack.gameObject.container, 0.2);
             await Utils.delay(500);
 
             this.gameObject.scene.tweens.add({
                 targets: cardStack.gameObject.container,
                 x: (this.cards.length * this.space) - (this.capacity * this.space) / 2,
                 duration,
-                onComplete: () => {
-                    resolve();
-                },
-            });
-        });
-    }
-
-    addEffect(cardStack: CardStack) {
-        return new Promise<void>(async (resolve) => {
-            const duration: number = 100;
-
-            this.gameObject.scene.tweens.add({
-                targets: cardStack.gameObject.container,
-                scale: cardStack.gameObject.container.scale + 0.2,
-                duration,
-                yoyo: true,
                 onComplete: () => {
                     resolve();
                 },
