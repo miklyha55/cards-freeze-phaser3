@@ -29,24 +29,55 @@ export class Tutorial {
 
         this.toggleTutorial({
             active: true,
-            portrait: {
-                scale: { x: 0.3, y: 0.3 },
+            relativePosition: {
+                portrait: {
+                    relativePosition: { x: 0, y: 0 },
+                    scale: { x: 0.5, y: 0.5 },
+                },
+                landscape: {
+                    relativePosition: { x: 0, y: 0 },
+                    scale: { x: 0.5, y: 0.5 },
+                },
             },
-            landscape: {
-                scale: { x: 0.3, y: 0.3 },
+            absolutePosition: {
+                portrait: {
+                    absolutePosition: { x: 100, y: 100 },
+                },
+                landscape: {
+                    absolutePosition: { x: 100, y: 100 },
+                },
             },
         });
+        
     }
 
     toggleTutorial(props: IROTutorialCfg) {
-        if(props.portrait) {
-            this.tutorialHand.resizeTutorialHand.props.portrait = props.portrait;
-            this.tutorialHand.resizeTutorialHand.onResize();
+        if(props.relativePosition) {
+            if(props.relativePosition.portrait) {
+                this.tutorialHand.relativeResizeTutorialHand.props.portrait
+                    = props.relativePosition.portrait;
+                this.tutorialHand.relativeResizeTutorialHand.onResize();
+            }
+
+            if(props.relativePosition.landscape) {
+                this.tutorialHand.relativeResizeTutorialHand.props.landscape
+                    = props.relativePosition.landscape;
+                this.tutorialHand.relativeResizeTutorialHand.onResize();
+            }
         }
 
-        if(props.landscape) {
-            this.tutorialHand.resizeTutorialHand.props.landscape = props.landscape;
-            this.tutorialHand.resizeTutorialHand.onResize();
+        if(props.absolutePosition) {
+            if(props.absolutePosition.portrait) {
+                this.tutorialHand.render.absoluteResizeTutorialHand.props.portrait
+                    = props.absolutePosition.portrait;
+                this.tutorialHand.render.absoluteResizeTutorialHand.onResize();
+            }
+
+            if(props.absolutePosition.landscape) {
+                this.tutorialHand.render.absoluteResizeTutorialHand.props.landscape
+                    = props.absolutePosition.landscape;
+                this.tutorialHand.render.absoluteResizeTutorialHand.onResize();
+            }
         }
 
         this.tutorialHand.gameObject.container.emit(COMPONENT_EVENTS.TOGGLE_ACTIVE, props.active);
@@ -65,7 +96,7 @@ export class Tutorial {
         const duration: number = 300;
 
         this.gameObject.scene.tweens.add({
-            targets: this.tutorialHand.spriteTutorialHand.sprite,
+            targets: this.tutorialHand.render.spriteTutorialHand.sprite,
             scale: 2,
             duration,
             yoyo: true,
