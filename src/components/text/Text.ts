@@ -16,8 +16,11 @@ export class Text extends Component
 
         props.origin && this.text.setOrigin(props.origin.x, props.origin.y);
         props.position && this.text.setPosition(props.position.x, props.position.y);
+        props.color && this.text.setColor(props.color);
+        props.fontFamily && this.text.setFontFamily(props.fontFamily);
 
         this.container.add(this.text);
+        console.log(this.text)
     }
 
     override onCreate() {

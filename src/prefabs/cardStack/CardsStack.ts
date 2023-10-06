@@ -1,6 +1,5 @@
 import { COMPONENT_EVENTS } from "../../components/core/events";
 import { Resize } from "../../components/resize/Resize";
-import { ASSETS_NAME } from "../../configs/assets/Assets";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
@@ -27,10 +26,12 @@ export class CardsStack {
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
                         portrait: {
-                           relativePosition: { x: 0.5, y: 0.5 },
+                           relativePosition: { x: 0.5, y: 0.8 },
+                           scale: { x: 1.1, y: 1.1 },
                         },
                         landscape: {
-                            relativePosition: { x: 0.5, y: 0.5 },
+                            relativePosition: { x: 0.5, y: 0.8 },
+                            scale: { x: 0.7, y: 0.7 },
                         },
                     }),
                 ],
@@ -45,7 +46,6 @@ export class CardsStack {
         this.cards = [];
 
         this.fillStack();
-        this.addCard(ASSETS_NAME.CardBack);
     }
 
     addCard(texture: string) {

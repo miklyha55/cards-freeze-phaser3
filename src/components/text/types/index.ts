@@ -6,4 +6,6 @@ export interface IROTextCfg extends IROComponentCfg {
     readonly size: number;
     readonly position?: IVec2;
     readonly origin?: IVec2;
+    readonly color?: string;
+    readonly fontFamily?: string;
 }

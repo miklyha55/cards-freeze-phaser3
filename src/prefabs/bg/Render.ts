@@ -20,7 +20,6 @@ export class Render {
                     }),
                 ],
                 context: props.context,
-                renderLayer: props.context.renderGameManager.getLayerByName(RENDER_LAYERS_NAME.Bg),
             }
         );
     }

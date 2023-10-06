@@ -1,0 +1,9 @@
+@font-face {
+    font-family: RubikBold;
+    src: url('../fonts/Rubik_Bold.ttf');
+}
+
+body {
+  margin: 0;
+  background-color: black;
+}

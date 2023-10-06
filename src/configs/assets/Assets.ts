@@ -31,6 +31,7 @@ export const enum ASSETS_NAME {
     Hand = "Hand",
     Logo = "Logo",
     Popup = "Popup",
+    TimerBack = "TimerBack",
 }
 
 export const Assets: ReadonlyArray<IROResourceCfg> = [
@@ -182,6 +183,11 @@ export const Assets: ReadonlyArray<IROResourceCfg> = [
     {
         name: ASSETS_NAME.Popup,
         path: "assets/images/ui/popup.png",
+        type: "image",
+    },
+    {
+        name: ASSETS_NAME.TimerBack,
+        path: "assets/images/ui/timer_back.png",
         type: "image",
     },
 ];
