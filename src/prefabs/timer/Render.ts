@@ -7,6 +7,7 @@ import { IROPrefabCfg } from "../../managers/gameObject/types";
 
 export class Render {
     gameObject: GameObject;
+    textTimer: Text;
 
     constructor(props: IROPrefabCfg) {
         const spriteTimerBack: Sprite = new Sprite({
@@ -15,7 +16,7 @@ export class Render {
             texture: ASSETS_NAME.TimerBack,
         });
 
-        const textTimerBack: Text = new Text({
+        this.textTimer = new Text({
             name: "Text",
             scene: props.context.scenes.hudScene,
             text: "00:12",
@@ -31,7 +32,7 @@ export class Render {
                 scene: props.context.scenes.hudScene,
                 components: [
                     spriteTimerBack,
-                    textTimerBack,
+                    this.textTimer,
                     new Resize({
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
@@ -52,7 +53,7 @@ export class Render {
                         landscape: {
                             absolutePosition: { x: -300, y: 200 },
                         },
-                        parent: textTimerBack.text,
+                        parent: this.textTimer.text,
                     }),
                 ],
                 context: props.context,

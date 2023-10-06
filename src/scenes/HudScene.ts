@@ -29,7 +29,7 @@ export default class HudScene extends Phaser.Scene {
         
         this.cardsStack = new CardsStack({ context });
         this.cardsOpen = new CardsOpen({ context });
-        this.timer = new Timer({ context });
+        this.timer = new Timer({ context, minutes: 2, seconds: 14 });
         
         // this.popupShow();
     }
