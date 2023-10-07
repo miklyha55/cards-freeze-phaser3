@@ -10,7 +10,7 @@ export class CardRight {
     constructor(props: IROPrefabCfg) {
         this.sprite =  new Sprite({
             name: "Sprite",
-            scene: props.context.scenes.gameScene,
+            scene: props.context.scenes.hudScene,
             texture: ASSETS_NAME.CardBack,
         });
 

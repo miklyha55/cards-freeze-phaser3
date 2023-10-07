@@ -10,6 +10,7 @@ import { CardsStack } from '../prefabs/cardStack/CardsStack';
 import { CardsOpen } from '../prefabs/openCard/CardsOpen';
 import { Timer } from '../prefabs/timer/Timer';
 import { Tutorial } from '../prefabs/tutorial/Tutorial';
+import { CardsSelect } from '../prefabs/selectCard/CardsSelect';
 
 export default class HudScene extends Phaser.Scene {
     uiElements: UiElements;
@@ -18,6 +19,7 @@ export default class HudScene extends Phaser.Scene {
     cardsOpen: CardsOpen;
     timer: Timer;
     tutorial: Tutorial;
+    cardsSelect: CardsSelect;
 
     constructor() {
         super(SCENE_NAMES.HudScene);
@@ -33,6 +35,7 @@ export default class HudScene extends Phaser.Scene {
         this.cardsOpen = new CardsOpen({ context });
         this.tutorial = new Tutorial({ context });
         this.timer = new Timer({ context, minutes: 2, seconds: 14 });
+        this.cardsSelect = new CardsSelect({ context });
         
         // this.popupShow();
     }
