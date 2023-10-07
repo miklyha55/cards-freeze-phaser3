@@ -7,6 +7,7 @@ import { Character } from '../prefabs/Character';
 import { CameraManager } from '../managers/camera/CameraManager';
 import { Window } from '../prefabs/Window';
 import { Fireplace } from '../prefabs/Fireplace';
+import { Utils } from '../utils';
 
 export default class GameScene extends Phaser.Scene {
     bg: Bg;
@@ -19,7 +20,7 @@ export default class GameScene extends Phaser.Scene {
         super(SCENE_NAMES.GameScene);
     }
 
-    create(context: IROContextCfg) {
+    async create(context: IROContextCfg) {
         this.bg = new Bg({context});
         this.window = new Window({context});
         this.character = new Character({context});

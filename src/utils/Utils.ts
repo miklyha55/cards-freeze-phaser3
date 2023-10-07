@@ -6,7 +6,6 @@ export namespace Utils {
     export function getWorldPosition(
         target: Phaser.GameObjects.Container
         | Phaser.GameObjects.Sprite
-        | Phaser.GameObjects.Image
     ) {
         const matrix: Phaser.GameObjects.Components.TransformMatrix = target.getWorldTransformMatrix();
         const position: IVec2 = { x: matrix.getX(0, 0), y: matrix.getY(0, 0) };

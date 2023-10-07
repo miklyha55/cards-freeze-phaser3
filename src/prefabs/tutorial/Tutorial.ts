@@ -29,28 +29,27 @@ export class Tutorial {
 
         this.tutorialHand.gameObject.container.emit(COMPONENT_EVENTS.TOGGLE_ACTIVE, false, false);
         
-        this.toggleTutorial({
-            active: true,
-            relativePosition: {
-                portrait: {
-                    relativePosition: { x: 0, y: 0 },
-                    scale: { x: 0.5, y: 0.5 },
-                },
-                landscape: {
-                    relativePosition: { x: 0, y: 0 },
-                    scale: { x: 0.5, y: 0.5 },
-                },
-            },
-            absolutePosition: {
-                portrait: {
-                    absolutePosition: { x: 100, y: 100 },
-                },
-                landscape: {
-                    absolutePosition: { x: 100, y: 100 },
-                },
-            },
-        });
-        
+        // this.toggleTutorial({
+        //     active: true,
+        //     relativePosition: {
+        //         portrait: {
+        //             relativePosition: { x: 0, y: 0 },
+        //             scale: { x: 0.5, y: 0.5 },
+        //         },
+        //         landscape: {
+        //             relativePosition: { x: 0, y: 0 },
+        //             scale: { x: 0.5, y: 0.5 },
+        //         },
+        //     },
+        //     absolutePosition: {
+        //         portrait: {
+        //             absolutePosition: { x: 100, y: 100 },
+        //         },
+        //         landscape: {
+        //             absolutePosition: { x: 100, y: 100 },
+        //         },
+        //     },
+        // });
     }
 
     toggleTutorial(props: IROTutorialCfg) {
