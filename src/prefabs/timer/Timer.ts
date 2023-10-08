@@ -64,7 +64,7 @@ export class Timer {
         this.timer = this.gameObject.scene.time.addEvent({
             delay: 1000,
             callback: () => {
-                if(this.isStop || !this.seconds && !this.minutes) {
+                if(!this.isStop || !this.seconds && !this.minutes) {
                     return;
                 }
 

@@ -28,7 +28,6 @@ export class CameraManager {
     cameraFollowTarget(
         target: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite,
         duration: number = 0,
-        offset: IVec2 = { x: 0, y: 0 },
     ) {
         return new Promise<void>(async (resolve) => {
             this.camera.stopFollow();
@@ -38,8 +37,8 @@ export class CameraManager {
 
             this.props.scene.tweens.add({
                 targets: this.camera,
-                scrollX: wirldPosition.x - this.camera.width / 2 + offset.x,
-                scrollY: wirldPosition.y - this.camera.height / 2 + offset.y,
+                scrollX: wirldPosition.x - this.camera.width / 2,
+                scrollY: wirldPosition.y - this.camera.height / 2,
                 duration,
                 onComplete: () => {
                     this.camera.startFollow(target);

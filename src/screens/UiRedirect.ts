@@ -2,34 +2,29 @@ import { Resize } from "../components/resize/Resize";
 import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
-import { CardsStack } from '../prefabs/cardStack/CardsStack';
-import { CardsSelect } from '../prefabs/selectCard/CardsSelect';
-import { Toggle } from "../components/toggle/Toggle";
+import { Button } from "../prefabs/uiElements/Button";
+import { Logo } from "../prefabs/uiElements/Logo";
 
-export class UiElements {
+export class UiRedirect {
     gameObject: GameObject;
-    cardsStack: CardsStack;
-    cardsSelect: CardsSelect;
 
     constructor(props: IROPrefabCfg) {
         this.gameObject = props.context.gameObjectManager.createGameObject(
             {
-                name: "UiElements",
+                name: "UiRedirect",
                 scene: props.context.scenes.hudScene,
                 components: [
                     new Resize({
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
-                        landscape: {
-                            relativePosition: { x: 0, y: 0 },
-                        },
                         portrait: {
                             relativePosition: { x: 0, y: 0 },
-                        }
-                    }),
-                    new Toggle({
-                        name: "Toggle",
-                        scene: props.context.scenes.hudScene,
+                            scale: { x: 1.3, y: 1.3 },
+                        },
+                        landscape: {
+                            relativePosition: { x: 0, y: 0},
+                            scale: { x: 0.8, y: 0.8 },
+                        },
                     }),
                 ],
                 context: props.context,
@@ -37,10 +32,10 @@ export class UiElements {
             }
         );
 
-        this.cardsStack = new CardsStack({ context: props.context });
-        this.cardsSelect = new CardsSelect({ context: props.context });
+        const logo: Logo = new Logo({ context: props.context });
+        const button: Button = new Button({ context: props.context });
 
-        this.gameObject.container.add(this.cardsStack.gameObject.container);
-        this.gameObject.container.add(this.cardsSelect.gameObject.container);
+        this.gameObject.container.add(logo.gameObject.container);
+        this.gameObject.container.add(button.gameObject.container);
     }
 }

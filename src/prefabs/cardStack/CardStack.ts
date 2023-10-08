@@ -5,18 +5,21 @@ import { IROPrefabCfg } from "../../managers/gameObject/types";
 
 export class CardStack {
     gameObject: GameObject;
+    spriteCard: Sprite;
 
     constructor(props: IROPrefabCfg) {
+        this.spriteCard = new Sprite({
+            name: "Sprite",
+            scene: props.context.scenes.gameScene,
+            texture: ASSETS_NAME.CardBack,
+        });
+
         this.gameObject = props.context.gameObjectManager.createGameObject(
             {
                 name: "CardsStack",
                 scene: props.context.scenes.hudScene,
                 components: [
-                    new Sprite({
-                        name: "Sprite",
-                        scene: props.context.scenes.gameScene,
-                        texture: ASSETS_NAME.CardBack,
-                    }),
+                    this.spriteCard,
                 ],
                 context: props.context,
             }

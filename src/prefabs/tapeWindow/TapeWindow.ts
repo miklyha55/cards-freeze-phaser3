@@ -27,12 +27,12 @@ export class TapeWindow {
                         name: "Resize",
                         scene: props.context.scenes.gameScene,
                         portrait: {
-                            absolutePosition: { x: 15, y: -300 },
-                            origin: { x: 0.5, y: 1 },
+                            absolutePosition: { x: 15, y: 0 },
+                            origin: { x: 0.5, y: 0.5 },
                         },
                         landscape: {
-                            absolutePosition: { x: 15, y: -300 },
-                            origin: { x: 0.5, y: 1 },
+                            absolutePosition: { x: 15, y: 0 },
+                            origin: { x: 0.5, y: 0.5 },
                         },
                         parent: this.spriteTapeWindow.sprite,
                     }),

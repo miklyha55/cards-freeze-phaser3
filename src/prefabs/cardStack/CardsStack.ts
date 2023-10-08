@@ -1,20 +1,20 @@
 import { COMPONENT_EVENTS } from "../../components/core/events";
 import { Resize } from "../../components/resize/Resize";
+import { ASSETS_NAME } from "../../configs/assets/Assets";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
-import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
 import { Utils } from "../../utils";
 import { CardStack } from "./CardStack";
 
 export class CardsStack {
     gameObject: GameObject;
-    
-    private capacity: number;
+    cards: CardStack[];
+    space: number = 40;
+    capacity: number;
+
     private amount: number;
-    private cards: CardStack[];
 
     private props: IROPrefabCfg;
-    private space: number = 40;
 
     constructor(props: IROPrefabCfg) {
         this.gameObject = props.context.gameObjectManager.createGameObject(
@@ -26,17 +26,16 @@ export class CardsStack {
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
                         portrait: {
-                           relativePosition: { x: 0.5, y: 0.8 },
-                           scale: { x: 1.1, y: 1.1 },
+                           relativePosition: { x: 0.4, y: 0.9 },
+                           scale: { x: 1, y: 1 },
                         },
                         landscape: {
-                            relativePosition: { x: 0.5, y: 0.8 },
+                            relativePosition: { x: 0.3, y: 0.8 },
                             scale: { x: 0.7, y: 0.7 },
                         },
                     }),
                 ],
                 context: props.context,
-                renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.CardsStack),
             }
         );
 
@@ -62,7 +61,10 @@ export class CardsStack {
                 targets: cardStack.gameObject.container,
                 x: (this.cards.length * this.space) - (this.capacity * this.space) / 2,
                 duration,
-                onComplete: () => {
+                onComplete: async () => {
+                    await Utils.turnOverCard(this.gameObject.scene, cardStack.gameObject.container, () => {
+                        cardStack.spriteCard.onSetTexture(ASSETS_NAME.CardBack);
+                    });
                     resolve();
                 },
             });

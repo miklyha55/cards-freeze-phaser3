@@ -41,10 +41,10 @@ export class Window {
                         name: "Resize",
                         scene: props.context.scenes.gameScene,
                         portrait: {
-                            origin: { x: 0.5, y: 1 },
+                            origin: { x: 0.5, y: 0.5 },
                         },
                         landscape: {
-                            origin: { x: 0.5, y: 1 },
+                            origin: { x: 0.5, y: 0.5 },
                         },
                         parent: this.spriteWindow.sprite,
                     }),
@@ -52,11 +52,11 @@ export class Window {
                         name: "Resize",
                         scene: props.context.scenes.gameScene,
                         portrait: {
-                            absolutePosition: { x: -200, y: 250 },
+                            absolutePosition: { x: -300, y: -100 },
                             scale: { x: 0.4, y: 0.4 },
                         },
                         landscape: {
-                            absolutePosition: { x: -200, y: 250 },
+                            absolutePosition: { x: -300, y: -100 },
                             scale: { x: 0.4, y: 0.4 },
                         },
                     }),
@@ -67,13 +67,13 @@ export class Window {
         );
 
         this.path = [
-            { x: -80, y: -1050 },
-            { x: 200, y: -950 },
-            { x: -110, y: -840 },
-            { x: 250, y: -740 },
-            { x: -140, y: -540 },
-            { x: 230, y: -380 },
-            { x: -130, y: -270 },
+            { x: -80, y: -1050 + 720 },
+            { x: 200, y: -950+ 720 },
+            { x: -110, y: -840+ 720 },
+            { x: 250, y: -740+ 720 },
+            { x: -140, y: -540+ 720 },
+            { x: 230, y: -380+ 720 },
+            { x: -130, y: -270+ 720 },
         ];
 
         this.tapeWindow = new TapeWindow({context: props.context});

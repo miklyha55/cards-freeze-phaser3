@@ -9,7 +9,7 @@ export class InputCatcher extends Component {
 
     constructor({ scene, context, parent }: IROCommandCfg) {
         super({
-            name: "InpurCatcher",
+            name: "InputCatcher",
             scene,
         })
 

@@ -13,6 +13,41 @@ export namespace Utils {
         return position;
     }
 
+    export function getLocaldPosition(
+        target: Phaser.GameObjects.Container
+        | Phaser.GameObjects.Sprite,
+        worldPosition: IVec2,
+    ) {
+        return {
+            x: target.getLocalPoint(worldPosition.x, worldPosition.y).x,
+            y: target.getLocalPoint(worldPosition.x, worldPosition.y).y,
+        }
+    }
+
+    export function turnOverCard(scene: Phaser.Scene, container: Phaser.GameObjects.Container, changeTexture: () => void) {
+        return new Promise<void>((resolve) => {
+            const duration: number = 50;
+            const scaleX: number = container.scaleX;
+
+            scene.tweens.add({
+                targets: container,
+                scaleX: 0,
+                duration,
+                onComplete: () => {
+                    changeTexture();
+                    scene.tweens.add({
+                        targets: container,
+                        scaleX,
+                        duration,
+                        onComplete: () => {
+                            resolve();
+                        },
+                    });
+                },
+            });
+        })
+    }
+
     export function bounceEffect(scene: Phaser.Scene, container: Phaser.GameObjects.Container, deltaScale: number = 0.1) {
         return new Promise<void>(async (resolve) => {
             const duration: number = 100;

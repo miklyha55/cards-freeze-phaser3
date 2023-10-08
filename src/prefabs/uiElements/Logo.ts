@@ -26,10 +26,14 @@ export class Logo {
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
                         portrait: {
+                            absolutePosition: { x: 0, y: 0 },
                             origin: { x: 0, y: 0 },
+                            scale: { x: 0.13, y: 0.13 },
                         },
                         landscape: {
+                            absolutePosition: { x: 0, y: 0 },
                             origin: { x: 0, y: 0 },
+                            scale: { x: 0.13, y: 0.13 },
                         },
                         parent: spriteComponent.sprite,
                     }),

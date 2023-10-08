@@ -34,7 +34,7 @@ export class Popup {
                         },
                         landscape: {
                             relativePosition: { x: 0.5, y: 0.5 },
-                            scale: { x: 0.5, y: 0.5 },
+                            scale: { x: 0.35, y: 0.35 },
                         },
                     }),
                     new Toggle({
@@ -43,7 +43,7 @@ export class Popup {
                     })
                 ],
                 context: props.context,
-                renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.UiElements),
+                renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.Popup),
             }
         );
 

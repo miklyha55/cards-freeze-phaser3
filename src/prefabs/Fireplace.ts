@@ -7,9 +7,10 @@ import { RENDER_LAYERS_NAME } from "../managers/render/constants";
 
 export class Fireplace {
     gameObject: GameObject;
+    spriteFireplace: Sprite;
 
     constructor(props: IROPrefabCfg) {
-        const spriteComponent: Sprite = new Sprite({
+        this.spriteFireplace = new Sprite({
             name: "Sprite",
             scene: props.context.scenes.gameScene,
             texture: ASSETS_NAME.Fireplace,
@@ -20,7 +21,7 @@ export class Fireplace {
                 name: "Fireplace",
                 scene: props.context.scenes.gameScene,
                 components: [
-                    spriteComponent,
+                    this.spriteFireplace,
                     new Resize({
                         name: "Resize",
                         scene: props.context.scenes.gameScene,
@@ -34,7 +35,7 @@ export class Fireplace {
                             scale: { x: 0.55, y: 0.55 },
                             origin: { x: 0.5, y: 1 },
                         },
-                        parent: spriteComponent.sprite,
+                        parent: this.spriteFireplace.sprite,
                     }),
                 ],
                 context: props.context,

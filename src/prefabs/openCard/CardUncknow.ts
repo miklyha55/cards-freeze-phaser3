@@ -1,3 +1,4 @@
+import { Resize } from "../../components/resize/Resize";
 import { Sprite } from "../../components/sprite/Sprite";
 import { ASSETS_NAME } from "../../configs/assets/Assets";
 import { GameObject } from "../../managers/gameObject/GameObject";
@@ -16,6 +17,16 @@ export class CardUncknow {
                         name: "Sprite",
                         scene: props.context.scenes.gameScene,
                         texture: ASSETS_NAME.CardUncknow,
+                    }),
+                    new Resize({
+                        name: "Resize",
+                        scene: props.context.scenes.hudScene,
+                        portrait: {
+                           scale: { x: 1.1, y: 1.1 },
+                        },
+                        landscape: {
+                            scale: { x: 1.1, y: 1.1 },
+                        },
                     }),
                 ],
                 context: props.context,

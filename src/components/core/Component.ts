@@ -6,6 +6,7 @@ export class Component {
     name: string;
     container: Phaser.GameObjects.Container;
     parent: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite | Phaser.GameObjects.Text;
+    active: boolean;
     
     protected scene: Phaser.Scene;
 
@@ -13,6 +14,7 @@ export class Component {
         this.name = props.name;
         this.scene = props.scene;
         this.container = props.scene.add.container(0, 0);
+        this.active = true;
     }
 
     remove() {}

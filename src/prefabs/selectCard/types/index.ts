@@ -1,4 +1,4 @@
-import { CardSelectCommand } from "../../../components/input/commands/cards/CardSelectCommand";
+import { CardSelectCommand } from "../../../components/input/commands/CardSelectCommand";
 import { IOrientationCfg } from "../../../components/resize/types";
 import { IROPrefabCfg } from "../../../managers/gameObject/types";
 
@@ -6,6 +6,7 @@ export interface IROCardSelectCfg extends IROPrefabCfg {
     readonly resize: IROCardSelectOrientationCfg;
     readonly texture: string;
     interractive?: IROCardInterractiveCfg;
+    IsUnknow?: true;
 }
 
 export interface IROCardSelectOrientationCfg {

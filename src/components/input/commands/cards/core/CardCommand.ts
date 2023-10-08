@@ -1,10 +1,8 @@
-import * as Phaser from 'phaser';
-
 import { InputCatcher } from "../../../InputCatcher";
-import { IROContextCfg } from '../../../../../scenes/types';
+import { IROCardCommandCfg } from '../types';
 
 export class CardCommand extends InputCatcher {
-    constructor(context: IROContextCfg, parent: Phaser.GameObjects.Sprite) {
-        super({ scene: context.scenes.gameScene, context, parent });
+    constructor(props: IROCardCommandCfg) {
+        super({ scene: props.context.scenes.hudScene, context: props.context, parent: props.parent });
     }
 }

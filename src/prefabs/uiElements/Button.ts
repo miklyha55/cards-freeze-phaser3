@@ -26,13 +26,14 @@ export class Button {
                         name: "Resize",
                         scene: props.context.scenes.hudScene,
                         portrait: {
-                            absolutePosition: { x: 230, y: 900 },
+                            absolutePosition: { x: 35, y: 110 },
                             origin: { x: 0, y: 0 },
+                            scale: { x: 0.25, y: 0.25 },
                         },
                         landscape: {
-                            absolutePosition: { x: 230, y: 850 },
+                            absolutePosition: { x: 35, y: 110 },
                             origin: { x: 0, y: 0 },
-                            scale: { x: 2, y: 2 },
+                            scale: { x: 0.25, y: 0.25 },
                         },
                         parent: spriteComponent.sprite,
                     }),

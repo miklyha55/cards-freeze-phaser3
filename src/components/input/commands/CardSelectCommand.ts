@@ -1,8 +1,8 @@
 import * as Phaser from 'phaser';
 
-import { InputCatcher } from "../../InputCatcher";
-import { IROContextCfg } from '../../../../scenes/types';
-import { Indexes } from '../../../../prefabs/selectCard/types';
+import { InputCatcher } from "../InputCatcher";
+import { IROContextCfg } from '../../../scenes/types';
+import { Indexes } from '../../../prefabs/selectCard/types';
 
 export class CardSelectCommand extends InputCatcher {
     private isPressed: boolean;
@@ -20,6 +20,10 @@ export class CardSelectCommand extends InputCatcher {
 
     override onPointerDown(pointer: Phaser.Input.Pointer) {
         this.isPressed = true;
+
+        if(!this.active) {
+            return;
+        }
         
         this.commandHandler();
     }
