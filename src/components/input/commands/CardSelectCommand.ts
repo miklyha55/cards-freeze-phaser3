@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 
 import { InputCatcher } from "../InputCatcher";
 import { IROContextCfg } from '../../../scenes/types';
-import { Indexes } from '../../../prefabs/selectCard/types';
+import { Indexes } from '../../../prefabs/cardsSelect/types';
 
 export class CardSelectCommand extends InputCatcher {
     private isPressed: boolean;

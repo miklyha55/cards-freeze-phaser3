@@ -2,9 +2,9 @@ import { ISize, IVec2 } from "../../../utils/types";
 import { IROComponentCfg } from "../../core/types";
 
 export interface IROResizeCfg extends IROComponentCfg {
-    readonly landscape: IOrientationCfg;
-    readonly portrait: IOrientationCfg;
-    readonly parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite | Phaser.GameObjects.Text | Phaser.GameObjects.TileSprite,
+    landscape: IOrientationCfg;
+    portrait: IOrientationCfg;
+    parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite | Phaser.GameObjects.Text | Phaser.GameObjects.TileSprite,
 }
 
 export interface IOrientationCfg {

@@ -2,8 +2,8 @@ import { Resize } from "../components/resize/Resize";
 import { GameObject } from "../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../managers/render/constants";
-import { CardsStack } from '../prefabs/cardStack/CardsStack';
-import { CardsSelect } from '../prefabs/selectCard/CardsSelect';
+import { CardsStack } from '../prefabs/cardsStack/CardsStack';
+import { CardsSelect } from '../prefabs/cardsSelect/CardsSelect';
 import { Toggle } from "../components/toggle/Toggle";
 
 export class UiElements {

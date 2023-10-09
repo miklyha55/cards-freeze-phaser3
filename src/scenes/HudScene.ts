@@ -9,7 +9,7 @@ import { Utils } from '../utils';
 import { Tutorial } from '../prefabs/tutorial/Tutorial';
 import { UiRedirect } from '../screens/UiRedirect';
 import { Timer } from '../prefabs/timer/Timer';
-import { CardsOpen } from '../prefabs/openCard/CardsOpen';
+import { CardsOpen } from '../prefabs/сardsOpen/CardsOpen';
 import { Redirect } from '../screens/Redirect';
 
 export default class HudScene extends Phaser.Scene {

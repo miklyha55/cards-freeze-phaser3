@@ -11,7 +11,7 @@ import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
 import { Utils } from "../../utils";
 import { IVec2 } from "../../utils/types";
-import { IROOpenCardsCfg } from "../openCard/types";
+import { IROOpenCardsCfg } from "../сardsOpen/types";
 import { CardSelect } from "./CardSelect";
 import { IROCardSelectCfg, Indexes } from "./types";
 import { CardUncknow } from './CardUncknow';
