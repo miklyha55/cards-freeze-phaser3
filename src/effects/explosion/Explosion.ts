@@ -11,12 +11,12 @@ export class Explosion {
             scale: { start: 0.5, end: 0 },
             gravityY: 150,
             blendMode: 'ADD',
-            emitting: false
+            emitting: false,
         });
     }
 
-    start(position: IVec2) {
-        this.explosionEffect.explode(16);
+    start(position: IVec2, count: number = 20) {
+        this.explosionEffect.explode(count);
         this.explosionEffect.setPosition(position.x, position.y);
     }
 }

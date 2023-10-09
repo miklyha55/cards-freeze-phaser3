@@ -13,7 +13,6 @@ export class CardsStack {
     capacity: number;
 
     private amount: number;
-
     private props: IROPrefabCfg;
 
     constructor(props: IROPrefabCfg) {

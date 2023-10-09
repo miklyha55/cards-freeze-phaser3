@@ -17,7 +17,7 @@ export class Rectangle extends Component
             props.size.width,
             props.size.height,
             props.fillColor,
-            props.fillAlpha
+            props.fillAlpha,
         );
         this.props = props;
 

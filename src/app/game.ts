@@ -13,7 +13,7 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         LoaderScene,
         GameScene,
-        HudScene
+        HudScene,
     ],
     scale: {
         mode: Phaser.Scale.RESIZE,

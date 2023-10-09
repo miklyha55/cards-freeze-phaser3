@@ -6,6 +6,7 @@ import { Indexes } from '../../../prefabs/cardsSelect/types';
 
 export class CardSelectCommand extends InputCatcher {
     private isPressed: boolean;
+    private isFirstPressed: boolean;
     private commandHandler: () => (indexes: Indexes) => void;
 
     constructor(
@@ -16,6 +17,7 @@ export class CardSelectCommand extends InputCatcher {
         super({ scene: context.scenes.gameScene, context, parent });
 
         this.commandHandler = commandHandler;
+        this.isFirstPressed = false;
     }
 
     override onPointerDown(pointer: Phaser.Input.Pointer) {
@@ -23,6 +25,11 @@ export class CardSelectCommand extends InputCatcher {
 
         if(!this.active) {
             return;
+        }
+
+        if(!this.isFirstPressed) {
+            this.isFirstPressed = true;
+            this.context.scenes.hudScene.timer.toggleTimer(true);
         }
         
         this.commandHandler();

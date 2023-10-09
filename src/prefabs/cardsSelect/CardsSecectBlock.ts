@@ -301,8 +301,6 @@ export class CardsSecectBlock {
                         200,
                     );
 
-                this.props.context.scenes.hudScene.timer.toggleTimer(true);
-
                 this.openCardCounter++;
                 this.stepCounter = 0;
             }
