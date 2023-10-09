@@ -1,26 +1,20 @@
-import { IOrientationCfg, IROResizeCfg } from "../../components/resize/types";
 import { Utils } from "../../utils";
 import { IVec2 } from "../../utils/types";
 
 export class CameraManager {
-    props: IROResizeCfg;
+    scene: Phaser.Scene;
     camera: Phaser.Cameras.Scene2D.Camera;
+    followTarget: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite;
 
-    private isResize: boolean;
-    private zoomBack: IVec2;
-    private positionBack: IVec2;
-
-
-    constructor(props: IROResizeCfg) {
-        this.props = props;
-        this.camera = props.scene.cameras.main;
-        this.isResize = true;
+    constructor(scene: Phaser.Scene) {
+        this.scene = scene;
+        this.camera = scene.cameras.main;
 
         this.onCreate();
     }
 
     onCreate() {
-        this.props.scene.scale.on('resize', this.onResize, this);
+        this.scene.scale.on('resize', this.onResize, this);
 
         this.onResize();
     }
@@ -30,21 +24,23 @@ export class CameraManager {
         duration: number = 0,
     ) {
         return new Promise<void>(async (resolve) => {
-            this.camera.stopFollow();
-            const wirldPosition: IVec2 = Utils.getWorldPosition(target);
+            const worldPosition: IVec2 = Utils.getWorldPosition(target);
+            this.followTarget = target;
 
-            this.saveBackProps();
-
-            this.props.scene.tweens.add({
-                targets: this.camera,
-                scrollX: wirldPosition.x - this.camera.width / 2,
-                scrollY: wirldPosition.y - this.camera.height / 2,
-                duration,
-                onComplete: () => {
-                    this.camera.startFollow(target);
-                    resolve();
-                },
-            });
+            if(duration) {
+                this.scene.tweens.add({
+                    targets: this.camera,
+                    scrollX: worldPosition.x - this.camera.width / 2,
+                    scrollY: worldPosition.y - this.camera.height / 2,
+                    duration,
+                    onComplete: () => {
+                        resolve();
+                    },
+                });
+            } else {
+                this.camera.scrollX = worldPosition.x - this.camera.width / 2;
+                this.camera.scrollY = worldPosition.y - this.camera.height / 2;
+            }
         });
     }
 
@@ -53,9 +49,7 @@ export class CameraManager {
         duration: number = 0,
     ) {
         return new Promise<void>(async (resolve) => {
-            this.saveBackProps();
-
-            this.props.scene.tweens.add({
+            this.scene.tweens.add({
                 targets: this.camera,
                 zoom,
                 duration,
@@ -68,15 +62,14 @@ export class CameraManager {
 
     cameraBack(duration: number = 0) {
         return new Promise<void>(async (resolve) => {
-            this.isResize = true;
-            this.camera.stopFollow();
+            this.followTarget = null;
 
-            this.props.scene.tweens.add({
+            this.scene.tweens.add({
                 targets: this.camera,
-                scrollX: this.positionBack.x,
-                scrollY: this.positionBack.y,
-                zoomX: this.zoomBack.x,
-                zoomY: this.zoomBack.y,
+                scrollX: 0,
+                scrollY: 0,
+                zoomX: 1,
+                zoomY: 1,
                 duration,
                 onComplete: () => {
                     resolve();
@@ -84,30 +77,10 @@ export class CameraManager {
             });
         });
     }
-
-    private saveBackProps() {
-        if(this.isResize) {
-            this.isResize = false;
-            this.positionBack = { x: this.camera.scrollX, y: this.camera.scrollY };
-            this.zoomBack = { x: this.camera.zoomX, y: this.camera.zoomY };
-        }
-    }
-
+    
     private onResize() {
-        if(!this.isResize) {
-            return;
-        }
-
-        const { innerWidth, innerHeight } = window;
-        const isLandscape: boolean = (innerWidth / innerHeight) > 1;
-        const orientation: IOrientationCfg = isLandscape ? this.props.landscape : this.props.portrait;
-
-        if(orientation.relativePosition) {
-            this.camera.setScroll(innerWidth * orientation.relativePosition.x, innerHeight * orientation.relativePosition.y);
-        }
-
-        if(orientation.scale) {
-            this.camera.setZoom(orientation.scale.x, orientation.scale.y);
+        if(this.followTarget) {
+            this.cameraFollowTarget(this.followTarget);
         }
     }
 }

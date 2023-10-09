@@ -15,6 +15,7 @@ import { IROOpenCardsCfg } from "../openCard/types";
 import { CardSelect } from "./CardSelect";
 import { IROCardSelectCfg, Indexes } from "./types";
 import { CardUncknow } from './CardUncknow';
+import { Component } from '../../components/core/Component';
 
 export class CardsSecectBlock {
     gameObject: GameObject;
@@ -167,13 +168,19 @@ export class CardsSecectBlock {
         });
     }
 
-    private toggleInputCards(col: number, active: boolean) {
-        this.cards[col].forEach((card) => {
-            if(!card) {
-                return;
-            }
+    private toggleInputCards(active: boolean) {
+        this.cards.forEach(cardsRow => {
+            cardsRow.forEach(card => {
+                if(!card) {
+                    return;
+                }
 
-            card.gameObject.getComponentByName("InputCatcher").active = active;
+                const input: Component = card.gameObject.getComponentByName("InputCatcher");
+
+                if(input) {
+                    input.active = active;
+                }
+            });
         });
     }
 
@@ -198,14 +205,31 @@ export class CardsSecectBlock {
     }
 
     private async commandHandler(indexes: Indexes) {
-        this.toggleInputCards(indexes[0], false);
+        this.toggleInputCards(false);
 
-        const offsetX: number = 150;
+        let isRestartTutorial: boolean = false;
+        let restartTutorialCounter: number = 0;
+
+        this.cards[indexes[0]].forEach(card => {
+            if(card) {
+                restartTutorialCounter++;
+
+                if(restartTutorialCounter > 1) {
+                    isRestartTutorial = true;
+                }
+            }
+        });
+
+        this.props.context.scenes.hudScene.tutorial.toggleTutorial({ active: false, restartSeconds: isRestartTutorial ? 1.5 : 0 }); 
+
         const card: CardSelect = this.cards[indexes[0]][indexes[1]];
-        const worldPosition: IVec2= Utils.getWorldPosition(this.props.context.scenes.hudScene.uiElements.cardsStack.gameObject.container);
+        const worldPosition: IVec2 = Utils.getWorldPosition(this.props.context.scenes.hudScene.uiElements.cardsStack.gameObject.container);
         const localPosition: IVec2 = Utils.getLocaldPosition(card.gameObject.container, worldPosition);
 
-        await this.flyCard(card.gameObject.container, { x: localPosition.x + card.gameObject.container.x + offsetX, y: localPosition.y });
+        await this.flyCard(card.gameObject.container, {
+            x: localPosition.x + card.gameObject.container.x,
+            y: localPosition.y,
+        });
 
         card.gameObject.remove();
         await this.props.context.scenes.hudScene.uiElements.cardsStack.addCard(card.props.texture);
@@ -226,8 +250,8 @@ export class CardsSecectBlock {
         if(isEmpty) {
             await this.showRow(indexes[0] + 1);
         }
-
-        this.toggleInputCards(indexes[0], true);
+        
+        this.toggleInputCards(true);
     }
 
     private async showRow(indexRow: number) {
@@ -250,6 +274,8 @@ export class CardsSecectBlock {
 
                 card.setData(props);
             });
+
+            this.toggleInputCards(false);
 
             if(cardIsUncknow) {
                 const cardUncknow: CardUncknow = new CardUncknow({ context: this.props.context });

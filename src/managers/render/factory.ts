@@ -1,7 +1,9 @@
 import * as Phaser from 'phaser';
 
+import { CameraBox } from '../../prefabs/CameraBox';
+
 export class Factory {
-    static CreateLayers(scene: Phaser.Scene, layerKeys: Array<string>) {
+    static CreateLayers(scene: Phaser.Scene, layerKeys: Array<string>, caberaBox?: CameraBox) {
         const layers: Array<Phaser.GameObjects.Container> = [];
 
         layerKeys.forEach(key => {
@@ -9,6 +11,10 @@ export class Factory {
 
             layer.name = key;
             layers.push(layer);
+
+            if(caberaBox) {
+                caberaBox.gameObject.container.add(layer);
+            }
         });
 
         return layers;

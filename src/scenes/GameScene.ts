@@ -7,7 +7,9 @@ import { Character } from '../prefabs/Character';
 import { CameraManager } from '../managers/camera/CameraManager';
 import { Window } from '../prefabs/Window';
 import { Fireplace } from '../prefabs/Fireplace';
-import { Utils } from '../utils';
+import { ASSETS_NAME } from '../configs/assets/Assets';
+import { Snow } from '../effects/snow/Snow';
+import { Explosion } from '../effects/explosion/Explosion';
 
 export default class GameScene extends Phaser.Scene {
     bg: Bg;
@@ -15,6 +17,8 @@ export default class GameScene extends Phaser.Scene {
     window: Window;
     fireplace: Fireplace;
     cameraManager: CameraManager;
+    snow: Snow;
+    explosion: Explosion;
 
     constructor() {
         super(SCENE_NAMES.GameScene);
@@ -26,17 +30,8 @@ export default class GameScene extends Phaser.Scene {
         this.character = new Character({context});
         this.fireplace = new Fireplace({context});
 
-        this.cameraManager = new CameraManager({
-            name: "CameraManager",
-            scene: this,
-            portrait: {
-                relativePosition: { x: -0.5, y: -0.5 },
-                scale: { x: 1.5, y: 1.5 },
-            },
-            landscape: {
-                relativePosition: { x: -0.5, y: -0.3 },
-                scale: { x: 0.9, y: 0.9 },
-            }
-        });
+        this.cameraManager = new CameraManager(this);
+        this.snow = new Snow(this);
+        this.explosion = new Explosion(this, ASSETS_NAME.Snow);
     }
 }

@@ -18,6 +18,7 @@ export class CardRedirectCommand extends CardCommand {
         this.isPressed = false;
 
         const url: string = 'https://play.google.com/store/apps/details?id=com.bfk.cards';
+        this.context.scenes.hudScene.createRedirectScreen();
 
         window.open(url, '_blank');
     }

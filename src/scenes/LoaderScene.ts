@@ -11,6 +11,7 @@ import { ASSETS_NAME } from '../configs/assets/Assets';
 import { RenderManager } from '../managers/render/RenderManager';
 import { RENDER_GAME_LAYERS, RENDER_UI_LAYERS } from '../managers/render/constants';
 import { GameObjectManager } from '../managers/gameObject/GameObjectManager';
+import { CameraBox } from '../prefabs/CameraBox';
 
 export default class LoaderScene extends Phaser.Scene {
     constructor() {
@@ -22,6 +23,8 @@ export default class LoaderScene extends Phaser.Scene {
 
         const gameScene: GameScene = this.scene.get(SCENE_NAMES.GameScene) as GameScene;
         const hudScene: HudScene = this.scene.get(SCENE_NAMES.HudScene) as HudScene;
+        const gameObjectManager: GameObjectManager = new GameObjectManager();
+        const cameraBox: CameraBox = new CameraBox(gameScene, gameObjectManager);
 
         const context: IROContextCfg = {
             scenes: {
@@ -30,9 +33,10 @@ export default class LoaderScene extends Phaser.Scene {
             },
 
             jsonGame: this.cache.json.get(ASSETS_NAME.GameCfg),
-            renderGameManager: new RenderManager(gameScene, RENDER_GAME_LAYERS),
+            renderGameManager: new RenderManager(gameScene, RENDER_GAME_LAYERS, cameraBox),
             renderUiManager: new RenderManager(hudScene, RENDER_UI_LAYERS),
-            gameObjectManager: new GameObjectManager(),
+            gameObjectManager,
+            cameraBox,
         }
 
         this.scene.launch(SCENE_NAMES.GameScene, context);

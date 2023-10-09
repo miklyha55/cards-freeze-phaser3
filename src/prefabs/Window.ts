@@ -1,5 +1,3 @@
-import * as Phaser from 'phaser';
-
 import { Resize } from "../components/resize/Resize";
 import { Sprite } from "../components/sprite/Sprite";
 import { ASSETS_NAME } from "../configs/assets/Assets";
@@ -20,9 +18,6 @@ export class Window {
     private tapeHand: TapeHand;
 
     private path: IVec2[];
-
-    private maskShape: Phaser.GameObjects.Graphics;
-    private bounds: Phaser.Geom.Rectangle;
 
     constructor(props: IROPrefabCfg) {
         this.spriteWindow = new Sprite({
@@ -67,13 +62,13 @@ export class Window {
         );
 
         this.path = [
-            { x: -80, y: -1050 + 720 },
-            { x: 200, y: -950+ 720 },
-            { x: -110, y: -840+ 720 },
-            { x: 250, y: -740+ 720 },
-            { x: -140, y: -540+ 720 },
-            { x: 230, y: -380+ 720 },
-            { x: -130, y: -270+ 720 },
+            { x: -80, y: -317 },
+            { x: 200, y: -230 },
+            { x: -110, y: -120 },
+            { x: 250, y: -20 },
+            { x: -140, y: 220 },
+            { x: 230, y: 370 },
+            { x: -130, y: 600 },
         ];
 
         this.tapeWindow = new TapeWindow({context: props.context});
@@ -84,8 +79,6 @@ export class Window {
 
         this.tapeHand.gameObject.container.setPosition(this.path[0].x, this.path[0].y);
         this.tapeHand.gameObject.container.alpha = 0;
-
-        this.createTapMask();
     }
 
     async repairAnimation() {
@@ -104,27 +97,10 @@ export class Window {
 
             this.moveToPath(1, resolve);
         }).then(async () => {
-            this.deleteMask();
             this.tapeHand.gameObject.container.alpha = 0;
 
             await Utils.bounceEffect(this.gameObject.scene, this.gameObject.container, 0.05);
         });
-    }
-
-    private deleteMask() {
-        this.maskShape.destroy();
-        this.tapeWindow.gameObject.container.clearMask();
-    }
-
-    private createTapMask() {
-        this.maskShape = this.gameObject.scene.make.graphics();
-        this.bounds = this.tapeWindow.gameObject.container.getBounds();
-
-        this.maskShape.fillStyle(0xffffff, 1);
-        this.maskShape.fillRect(this.bounds.x, this.bounds.y - this.bounds.height, this.bounds.width, this.bounds.height);
-
-        this.tapeWindow.gameObject.container.mask =
-            new Phaser.Display.Masks.GeometryMask(this.gameObject.scene, this.maskShape);
     }
 
     private moveToPath(index: number, resolve: () => void) {
@@ -146,7 +122,7 @@ export class Window {
                 }
             },
             onUpdate: () => {
-                this.maskShape.y = (this.tapeHand.gameObject.container.y - this.path[0].y) * this.gameObject.container.scaleY;
+                this.tapeWindow.moveMask(this.tapeHand.gameObject.container.y - this.path[0].y);
             },
         });
     }

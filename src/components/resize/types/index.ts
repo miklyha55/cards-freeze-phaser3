@@ -4,7 +4,7 @@ import { IROComponentCfg } from "../../core/types";
 export interface IROResizeCfg extends IROComponentCfg {
     landscape: IOrientationCfg;
     portrait: IOrientationCfg;
-    parent?: Phaser.GameObjects.Container| Phaser.GameObjects.Sprite | Phaser.GameObjects.Text,
+    parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Sprite | Phaser.GameObjects.Text | Phaser.GameObjects.TileSprite,
 }
 
 export interface IOrientationCfg {

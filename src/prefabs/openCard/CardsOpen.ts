@@ -4,7 +4,9 @@ import { Toggle } from "../../components/toggle/Toggle";
 import { ASSETS_NAME } from "../../configs/assets/Assets";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
+import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
 import { Utils } from "../../utils";
+import { IROTutorialCfg } from "../tutorial/types";
 import { CardLeft } from "./CardLeft";
 import { CardRight } from "./CardRight";
 import { CardUncknow } from "./CardUncknow";
@@ -13,10 +15,11 @@ import { IROOpenCardsCfg } from "./types";
 export class CardsOpen {
     gameObject: GameObject;
 
-    cardLeft: CardLeft;
-    cardRight: CardRight;
-    cardUncknow: CardUncknow;
-    props: IROPrefabCfg;
+    private cardLeft: CardLeft;
+    private cardRight: CardRight;
+    private cardUncknow: CardUncknow;
+    private props: IROPrefabCfg;
+    private timer: Phaser.Time.TimerEvent;
 
     constructor(props: IROPrefabCfg) {
         this.gameObject = props.context.gameObjectManager.createGameObject(
@@ -40,6 +43,7 @@ export class CardsOpen {
                     }),
                 ],
                 context: props.context,
+                renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.UiElements),
             }
         );
 
@@ -54,6 +58,11 @@ export class CardsOpen {
         this.gameObject.container.add(this.cardUncknow.gameObject.container);
 
         this.resetCards();
+    }
+
+    hideTutorial() {
+        this.timer.remove();
+        this.props.context.scenes.hudScene.tutorial.toggleTutorial({ active: false });
     }
 
     resetCards() {
@@ -94,6 +103,8 @@ export class CardsOpen {
         await Promise.all([promiceRight, promiceLeft]);
         await Utils.delay(500);
 
+        this.showTutorial();
+
         Utils.turnOverCard(this.gameObject.scene, this.cardRight.gameObject.container, () => {
             this.cardRight.sprite.sprite.setScale(0.5, 0.5);
             this.cardRight.sprite.onSetTexture(props.textureRight);
@@ -124,6 +135,70 @@ export class CardsOpen {
             });
             
             this.cardLeft.gameObject.addComponent(command);
+        });
+    }
+
+    private showTutorial() {
+        this.props.context.scenes.hudScene.tutorial.resizeTutorial.props.portrait = {
+            relativePosition: { x: 0.5, y: 0.5 },
+            scale: { x: 1, y: 1 },
+        }
+        
+        this.props.context.scenes.hudScene.tutorial.resizeTutorial.props.landscape = {
+            relativePosition: { x: 0.5, y: 0.5 },
+            scale: { x: 1, y: 1 },
+        }
+
+        this.props.context.scenes.hudScene.tutorial.resizeTutorial.onResize();
+
+        const tutorialsCfg: IROTutorialCfg[] = [
+            {
+                active: true,
+                absolutePosition: {
+                    portrait: {
+                        absolutePosition: { x: 600, y: 200 },
+                        scale: { x: 0.5, y: 0.5 },
+                     },
+                     landscape: {
+                        absolutePosition: { x: 600, y: 200 },
+                        scale: { x: 0.5, y: 0.5 },
+                     },
+                },
+            },
+            {
+                active: true,
+                absolutePosition: {
+                    portrait: {
+                        absolutePosition: { x: -600, y: 200 },
+                        scale: { x: 0.7, y: 0.7 },
+                     },
+                     landscape: {
+                        absolutePosition: { x: -600, y: 200 },
+                        scale: { x: 0.5, y: 0.5 },
+                     },
+                },
+            }
+        ];
+        const countTutorialCfg: number = 0;
+
+        this.loopShowTutorial(tutorialsCfg, countTutorialCfg);
+    }
+
+    private loopShowTutorial(tutorialsCfg: IROTutorialCfg[], countTutorialCfg: number) {
+        this.props.context.scenes.hudScene.tutorial.toggleTutorial({ active: false });
+        this.props.context.scenes.hudScene.tutorial.toggleTutorial(tutorialsCfg[countTutorialCfg]);
+
+        this.timer = this.gameObject.scene.time.addEvent({
+            delay: 2000,
+            callback: () => {
+                countTutorialCfg++;
+
+                if(tutorialsCfg.length === countTutorialCfg) {
+                    countTutorialCfg = 0;
+                }
+                
+                this.loopShowTutorial(tutorialsCfg, countTutorialCfg);
+            },
         });
     }
 

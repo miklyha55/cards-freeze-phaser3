@@ -13,8 +13,12 @@ export class TutorialHand {
         this.relativeResizeTutorialHand = new Resize({
             name: "Resize",
             scene: props.context.scenes.hudScene,
-            portrait: {},
-            landscape: {},
+            portrait: {
+                scale: {x: 0.5, y: 0.5 },
+            },
+            landscape: {
+                scale: {x: 0.5, y: 0.5 },
+            },
         });
 
         this.gameObject = props.context.gameObjectManager.createGameObject(

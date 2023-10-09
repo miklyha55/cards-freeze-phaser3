@@ -6,7 +6,7 @@ import { IROContextCfg } from '../../../scenes/types';
 export class RedirectCommand extends InputCatcher {
     private isPressed: boolean;
 
-    constructor(context: IROContextCfg, parent: Phaser.GameObjects.Sprite) {
+    constructor(context: IROContextCfg, parent?: Phaser.GameObjects.Sprite) {
         super({ scene: context.scenes.gameScene, context, parent });
     }
 

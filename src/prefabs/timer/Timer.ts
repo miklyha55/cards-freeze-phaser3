@@ -1,4 +1,5 @@
 import { Resize } from "../../components/resize/Resize";
+import { Toggle } from "../../components/toggle/Toggle";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
 import { Render } from "./Render";
@@ -32,6 +33,10 @@ export class Timer {
                             scale: { x: 0.4, y: 0.4 },
                         },
                     }),
+                    new Toggle({
+                        name: "Toggle",
+                        scene: props.context.scenes.hudScene,
+                    })
                 ],
                 context: props.context,
                 renderLayer: props.context.renderUiManager.getLayerByName(RENDER_LAYERS_NAME.UiElements),
@@ -46,8 +51,6 @@ export class Timer {
         this.seconds = props.seconds;
 
         this.isStop = false;
-
-        this.startTimer();
     }
 
     toggleTimer(active: boolean) {
@@ -58,29 +61,31 @@ export class Timer {
         this.timer.remove();
     }
 
-    private startTimer() {
+    startTimer() {
         this.updateView();
-
-        this.timer = this.gameObject.scene.time.addEvent({
-            delay: 1000,
-            callback: () => {
-                if(!this.isStop || !this.seconds && !this.minutes) {
-                    return;
-                }
-
-                this.updateView();
-
-                if(!this.seconds) {
-                    if(!this.minutes) {
-                        this.timer.remove();
+        return new Promise<void>((resolve) => {
+            this.timer = this.gameObject.scene.time.addEvent({
+                delay: 1000,
+                callback: () => {
+                    if(!this.isStop) {
+                        return;
                     }
-                    this.seconds = 60;
-                    this.minutes--;
-                }
 
-                this.seconds--;
-            },
-            loop: true,
+                    this.updateView();
+                    if(!this.seconds) {
+                        if(!this.minutes) {
+                            resolve();
+                            this.timer.remove();
+                        }
+                        this.seconds = 60;
+                        this.minutes--;
+                        console.log(this.seconds, this.minutes)
+                    }
+
+                    this.seconds--;
+                },
+                loop: true,
+            });
         });
     }
 
