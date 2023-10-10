@@ -6,6 +6,7 @@ import { CardsSecectBlock } from "./CardsSecectBlock";
 
 export class Render {
     gameObject: GameObject;
+    cardsSelectBlock: CardsSecectBlock;
 
     constructor(props: IROPrefabCfg) {
         this.gameObject = props.context.gameObjectManager.createGameObject(
@@ -28,9 +29,9 @@ export class Render {
             }
         );
 
-        const cardsSelectBlock: CardsSecectBlock 
+        this.cardsSelectBlock 
             = new CardsSecectBlock({ context: props.context });
 
-        this.gameObject.container.add(cardsSelectBlock.gameObject.container);
+        this.gameObject.container.add(this.cardsSelectBlock.gameObject.container);
     }
 }

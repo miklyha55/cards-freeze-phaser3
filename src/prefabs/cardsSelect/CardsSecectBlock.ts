@@ -16,6 +16,7 @@ import { CardSelect } from "./CardSelect";
 import { IROCardSelectCfg, Indexes } from "./types";
 import { CardUncknow } from './CardUncknow';
 import { Component } from '../../components/core/Component';
+import { CardStack } from '../cardsStack/CardStack';
 
 export class CardsSecectBlock {
     gameObject: GameObject;
@@ -223,11 +224,17 @@ export class CardsSecectBlock {
         this.props.context.scenes.hudScene.tutorial.toggleTutorial({ active: false, restartSeconds: isRestartTutorial ? 1.5 : 0 }); 
 
         const card: CardSelect = this.cards[indexes[0]][indexes[1]];
+        const space: number = this.props.context.scenes.hudScene.uiElements.cardsStack.space;
+        const cards: CardStack[] = this.props.context.scenes.hudScene.uiElements.cardsStack.cards;
+
         const worldPosition: IVec2 = Utils.getWorldPosition(this.props.context.scenes.hudScene.uiElements.cardsStack.gameObject.container);
-        const localPosition: IVec2 = Utils.getLocaldPosition(card.gameObject.container, worldPosition);
+        const localPosition: IVec2 = Utils.getLocaldPosition(card.gameObject.container, {
+            x: worldPosition.x + (cards.length * space) / 2,
+            y: worldPosition.y,
+        });
 
         await this.flyCard(card.gameObject.container, {
-            x: localPosition.x + card.gameObject.container.x,
+            x: localPosition.x + card.gameObject.container.x * this.props.context.scenes.hudScene.uiElements.cardsStack.gameObject.container.scaleX,
             y: localPosition.y,
         });
 

@@ -1,4 +1,5 @@
 import { Resize } from "../../components/resize/Resize";
+import { Glow } from "../../effects/glow/Glow";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
 import { Render } from "./Render";
@@ -6,6 +7,7 @@ import { Render } from "./Render";
 export class CardsSelect {
     gameObject: GameObject;
     props: IROPrefabCfg;
+    rener: Render
 
     constructor(props: IROPrefabCfg) {
         this.gameObject = props.context.gameObjectManager.createGameObject(
@@ -31,9 +33,9 @@ export class CardsSelect {
         );
 
 
-        const rener: Render = new Render({ context: props.context });
+        this.rener = new Render({ context: props.context });
 
-        this.gameObject.container.add(rener.gameObject.container);
+        this.gameObject.container.add(this.rener.gameObject.container);
         this.props = props;
     }
 
@@ -54,14 +56,30 @@ export class CardsSelect {
             active: true,
             absolutePosition: {
                 portrait: {
-                    absolutePosition: { x: 1500, y: 2500 },
+                    absolutePosition: { x: 1300, y: 2500 },
                     scale: { x: 1.5, y: 1.5 },
                  },
                  landscape: {
-                     absolutePosition: { x: 1800, y: 1900 },
+                     absolutePosition: { x: 1600, y: 1900 },
                      scale: { x: 1.5, y: 1.5 },
                  },
             },
+        });
+
+        this.rener.cardsSelectBlock.cards.forEach((cardRow) => {
+            cardRow.forEach((card) => {
+                if(!card) {
+                    return;
+                }
+
+                if(card.props.glowEffect) {
+                    card.props.glowEffect.stop();
+                }
+
+                if(card.props.interractive) {
+                    card.props.glowEffect = new Glow(this.gameObject.scene, card.spriteCard.sprite);
+                }
+            });
         });
     }
 }

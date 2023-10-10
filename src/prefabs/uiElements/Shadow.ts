@@ -17,7 +17,7 @@ export class Shadow {
                         scene: props.context.scenes.hudScene,
                         fillColor: 0x000,
                         fillAlpha: 0.5,
-                        size: { width: 5000, height: 5000 },
+                        size: { width: 6000, height: 6000 },
                         position: { x:0, y: 0 },
                     }),
                 ],
