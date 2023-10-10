@@ -2,6 +2,7 @@ import { Component } from "../../components/core/Component";
 import { Resize } from "../../components/resize/Resize";
 import { Toggle } from "../../components/toggle/Toggle";
 import { ASSETS_NAME } from "../../configs/assets/Assets";
+import { Glow } from "../../effects/glow/Glow";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
@@ -66,14 +67,14 @@ export class CardsOpen {
     }
 
     resetCards() {
-        this.cardRight.sprite.sprite.setScale(1, 1);
-        this.cardLeft.sprite.sprite.setScale(1, 1);
+        this.cardRight.spriteCard.sprite.setScale(1, 1);
+        this.cardLeft.spriteCard.sprite.setScale(1, 1);
 
         this.cardRight.gameObject.container.setPosition(0, 0);
         this.cardLeft.gameObject.container.setPosition(0, 0);
 
-        this.cardLeft.sprite.onSetTexture(ASSETS_NAME.CardBack);
-        this.cardRight.sprite.onSetTexture(ASSETS_NAME.CardBack);
+        this.cardLeft.spriteCard.onSetTexture(ASSETS_NAME.CardBack);
+        this.cardRight.spriteCard.onSetTexture(ASSETS_NAME.CardBack);
 
         this.cardRight.gameObject.container.alpha = 0;
         this.cardLeft.gameObject.container.alpha = 0;
@@ -106,8 +107,8 @@ export class CardsOpen {
         this.showTutorial();
 
         Utils.turnOverCard(this.gameObject.scene, this.cardRight.gameObject.container, () => {
-            this.cardRight.sprite.sprite.setScale(0.5, 0.5);
-            this.cardRight.sprite.onSetTexture(props.textureRight);
+            this.cardRight.spriteCard.sprite.setScale(0.5, 0.5);
+            this.cardRight.spriteCard.onSetTexture(props.textureRight);
 
             if(!props.commandRight) {
                 return;
@@ -115,15 +116,15 @@ export class CardsOpen {
 
             const command: Component = new props.commandRight({
                 context: this.props.context,
-                parent: this.cardRight.sprite.sprite,
+                parent: this.cardRight.spriteCard.sprite,
             });
 
             this.cardRight.gameObject.addComponent(command);
         });
 
         Utils.turnOverCard(this.gameObject.scene, this.cardLeft.gameObject.container, () => {
-            this.cardLeft.sprite.sprite.setScale(0.5, 0.5);
-            this.cardLeft.sprite.onSetTexture(props.textureLeft);
+            this.cardLeft.spriteCard.sprite.setScale(0.5, 0.5);
+            this.cardLeft.spriteCard.onSetTexture(props.textureLeft);
 
             if(!props.commandLeft) {
                 return;
@@ -131,7 +132,7 @@ export class CardsOpen {
 
             const command: Component = new props.commandLeft({
                 context: this.props.context,
-                parent: this.cardLeft.sprite.sprite,
+                parent: this.cardLeft.spriteCard.sprite,
             });
             
             this.cardLeft.gameObject.addComponent(command);
@@ -182,6 +183,17 @@ export class CardsOpen {
         const countTutorialCfg: number = 0;
 
         this.loopShowTutorial(tutorialsCfg, countTutorialCfg);
+
+        if(this.cardLeft.glowEffect) {
+            this.cardLeft.glowEffect.stop();
+        }
+
+        if(this.cardRight.glowEffect) {
+            this.cardRight.glowEffect.stop();
+        }
+
+        this.cardLeft.glowEffect = new Glow(this.gameObject.scene, this.cardLeft.spriteCard.sprite, 20);
+        this.cardRight.glowEffect = new Glow(this.gameObject.scene, this.cardRight.spriteCard.sprite, 20);
     }
 
     private loopShowTutorial(tutorialsCfg: IROTutorialCfg[], countTutorialCfg: number) {

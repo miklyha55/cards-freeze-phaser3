@@ -1,3 +1,4 @@
+import { Resize } from "../../components/resize/Resize";
 import { GameObject } from "../../managers/gameObject/GameObject";
 import { IROPrefabCfg } from "../../managers/gameObject/types";
 import { RENDER_LAYERS_NAME } from "../../managers/render/constants";
@@ -11,7 +12,18 @@ export class Bg {
             {
                 name: "Bg",
                 scene: props.context.scenes.gameScene,
-                components: [],
+                components: [
+                    new Resize({
+                        name: "Resize",
+                        scene: props.context.scenes.gameScene,
+                        portrait: {
+                           scale: { x: 1, y: 1 },
+                        },
+                        landscape: {
+                            scale: { x: 1.2, y: 1 },
+                        },
+                    }),
+                ],
                 context: props.context,
                 renderLayer: props.context.renderGameManager.getLayerByName(RENDER_LAYERS_NAME.Bg),
             }

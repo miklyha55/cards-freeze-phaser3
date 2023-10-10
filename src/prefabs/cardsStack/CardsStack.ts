@@ -82,7 +82,7 @@ export class CardsStack {
     }
 
     private fillStack() {
-        for (let index = 0; index < this.amount; index++) {
+        for (let index = 1; index < this.amount + 1; index++) {
             this.createCard(index);
         }
     }
